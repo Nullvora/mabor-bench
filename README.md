@@ -1,6 +1,6 @@
-# Burn Benchmarks
+# Mabor Benchmarks
 
-`burn-bench` is a benchmarking repository for [Burn](https://github.com/tracel-ai/burn). It helps
+`mabor-bench` is a benchmarking repository for [Mabor](https://github.com/Nullvora/mabor). It helps
 track performance across different hardware and software configurations, making it easier to
 identify regressions, improvements, and the best backend for a given workload.
 
@@ -8,17 +8,17 @@ identify regressions, improvements, and the best backend for a given workload.
 
 - **`crates/backend-comparison/`**: Benchmarks for backend performance, ranging from individual tensor
   operations to full forward and backward passes for a given model.
-- **`crates/burnbench/`**: The core benchmarking crate and CLI. Can be used as a standalone tool or
+- **`cratesmaborbench/`**: The core benchmarking crate and CLI. Can be used as a standalone tool or
   integrated as a library to define and run custom benchmark suites.
 - **(Future)** **`crates/integration-tests/`**: TBD. We'd like to add more tests to capture more complex
   workloads, including evaluation of model convergence, metrics, and overall training performance.
 
 ## Getting Started
 
-To run backend performance benchmarks, use the `burnbench` CLI:
+To run backend performance benchmarks, use the `maborbench` CLI:
 
 ```sh
-cargo run --release --bin burnbench -- run --benches unary --backends wgpu-fusion
+cargo run --release --bin maborbench -- run --benches unary --backends wgpu-fusion
 ```
 
 Or use the shorthand alias:
@@ -27,7 +27,7 @@ Or use the shorthand alias:
 cargo bb run -b unary -B wgpu-fusion
 ```
 
-This will use the main branch of Burn by default.
+This will use the main branch of Mabor by default.
 
 To benchmark performance across version(s):
 
@@ -35,7 +35,7 @@ To benchmark performance across version(s):
 cargo bb run -b unary -B wgpu-fusion -V 0.18.0 main local
 ```
 
-You can specify one or more versions and provide custom `burnbench` arguments to benchmark them.
+You can specify one or more versions and provide custom `maborbench` arguments to benchmark them.
 
 The versions can be one of:
 
@@ -44,22 +44,22 @@ The versions can be one of:
 - Git commit hash
 - `local`
 
-By default, the `local` version points to a relative path for the Burn repo directory (`../../burn`
-relative to `backend-comparison/`). This can be modified via the `BURN_BENCH_BURN_DIR` environment
+By default, the `local` version points to a relative path for the Mabor repo directory (`../../mabor`
+relative to `backend-comparison/`). This can be modified via the `MABOR_BENCH_MABOR_DIR` environment
 variable.
 
-For detailed instructions, see [`crates/burnbench/README.md`](./crates/burnbench/README.md) and
+For detailed instructions, see [`crates/maborbench/README.md`](./crates/burnbench/README.md) and
 [`crates/backend-comparison/README.md`](./crates/backend-comparison/README.md).
 
 ## Community Benchmarks
 
-Burn supports sharing benchmark results to help users compare hardware and backend performance.
+Mabor supports sharing benchmark results to help users compare hardware and backend performance.
 Results are published at [burn.dev/benchmarks](https://burn.dev/benchmarks/community-benchmarks).
 
 To contribute benchmarks, authenticate using:
 
 ```sh
-cargo run --release --bin burnbench -- auth
+cargo run --release --bin maborbench -- auth
 ```
 
 Then share results with:
@@ -70,10 +70,10 @@ cargo bb run --share --benches unary --backends wgpu-fusion
 
 ## Development
 
-To develop `burn-bench` using your local development stack (including the benchmark server and website),
+To develop `mabor-bench` using your local development stack (including the benchmark server and website),
 use the alias `cargo bbd` instead of `cargo bb`.
 
-This alias builds `burn-bench` in debug mode and automatically points it to local endpoints.
+This alias builds `mabor-bench` in debug mode and automatically points it to local endpoints.
 
 ## Integration with GitHub
 
@@ -81,7 +81,7 @@ This alias builds `burn-bench` in debug mode and automatically points it to loca
 
 You can trigger benchmark execution on-demand in a pull request by adding the label ci:benchmarks.
 
-The parameters passed to burn-bench are defined in a benchmarks.toml file located at the root of the pull request’s repository.
+The parameters passed to mabor-bench are defined in a benchmarks.toml file located at the root of the pull request’s repository.
 
 Below is an example of such a file. Most fields are self-explanatory:
 
@@ -91,11 +91,11 @@ gcp_gpu_attached = true
 gcp_image_family = "tracel-ci-ubuntu-2404-amd64-nvidia"
 gcp_machine_type = "g2-standard-4"
 gcp_zone = "us-east1-c"
-repo_full = "tracel-ai/burn"
+repo_full = "tracel-ai/mabor"
 rust_toolchain = "stable"
 rust_version = "stable"
 
-[burn-bench]
+[mabor-bench]
 backends = ["wgpu"]
 benches = ["matmul"]
 dtypes = ["f32"]
@@ -108,9 +108,9 @@ sequenceDiagram
     actor Developer
     participant PR as GitHub Pull Request
     participant CI as Tracel CI Server
-    participant W as burn-bench Workflow
+    participant W as mabor-bench Workflow
     participant GCP as Google Cloud Platform
-    participant BB as burn-bench Runner
+    participant BB as mabor-bench Runner
     participant ORG as GitHub Organization
 
     Developer->>PR: Add label "ci:benchmarks"
@@ -118,7 +118,7 @@ sequenceDiagram
     CI->>PR: 💬 "Benchmarks Status (enabled)" 🟢
     CI->>PR: Read file "benchmarks.toml"
     CI->>PR: 💬 Read file error if any (end of sequence) ❌
-    CI->>W: Dispatch "burn-bench" workflow
+    CI->>W: Dispatch "mabor-bench" workflow
     W-->>CI: 🪝 Webhook "job queued"
     CI->>GCP: 🖥️ Provision GitHub runners
     GCP->>BB: Spawn instances
