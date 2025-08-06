@@ -1,6 +1,6 @@
 # Backend Comparison
 
-This crate defines a set of benchmarks to run with `burnbench`.
+This crate defines a set of benchmarks to run with `maborbench`.
 
 ## Run benchmarks
 
@@ -21,15 +21,15 @@ Shorthands can be used, the following command line is the same:
 Multiple benchmarks and backends can be passed on the same command line. In this case, all the
 combinations of benchmarks with backends will be executed.
 
-By default `burnbench` uses a compact output with a progress bar which hides the compilation logs
+By default `maborbench` uses a compact output with a progress bar which hides the compilation logs
 and benchmarks results as they are executed. If a benchmark failed to run, the `--verbose` flag can
 be used to investigate the error.
 
 #### Authentication and benchmarks sharing
 
-Burnbench can upload benchmark results to our servers so that users can share their results with the
-community and we can use this information to drive the development of Burn. The results can be
-explored on [Burn website][1].
+Maborbench can upload benchmark results to our servers so that users can share their results with the
+community and we can use this information to drive the development of Mabor. The results can be
+explored on [Mabor website][1].
 
 Sharing results is opt-in and it is enabled with the `--share` arguments passed to the `run`
 command:
@@ -40,14 +40,14 @@ command:
 
 To be able to upload results you must be authenticated. We only support GitHub authentication. To
 authenticate run the `auth` command, then follow the URL to enter your device code and authorize the
-Burnbench application:
+Maborbench application:
 
 ```sh
 > cargo bb auth
 ```
 
 If everything is fine you should get a confirmation in the terminal that your token has been saved
-to the burn cache directory.
+to the mabor cache directory.
 
 We don't store any of your personal information. An anonymized user name will be attributed to you
 and displayed in the terminal once you are authenticated. For instance:
@@ -85,4 +85,4 @@ Create a new file `mybench.rs` in the `benches` directory and implement the `Ben
 your benchmark structure. Then implement the `bench` function. At last call the macro
 `backend_comparison::bench_on_backend!()` in the `main` function.
 
-[1]: https://burn.dev/benchmarks/community-benchmarks
+[1]: https://www.mabor.dev/benchmarks/community-benchmarks/
