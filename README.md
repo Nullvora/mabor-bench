@@ -54,7 +54,7 @@ For detailed instructions, see [`crates/maborbench/README.md`](./crates/burnbenc
 ## Community Benchmarks
 
 Mabor supports sharing benchmark results to help users compare hardware and backend performance.
-Results are published at [burn.dev/benchmarks](https://burn.dev/benchmarks/community-benchmarks).
+Results are published at [https://www.mabor.dev/benchmarks/community-benchmarks/).
 
 To contribute benchmarks, authenticate using:
 
@@ -88,10 +88,10 @@ Below is an example of such a file. Most fields are self-explanatory:
 ```toml
 [environment]
 gcp_gpu_attached = true
-gcp_image_family = "tracel-ci-ubuntu-2404-amd64-nvidia"
+gcp_image_family = "nullvora-ci-ubuntu-2404-amd64-nvidia"
 gcp_machine_type = "g2-standard-4"
 gcp_zone = "us-east1-c"
-repo_full = "tracel-ai/mabor"
+repo_full = "nullvora-ai/mabor"
 rust_toolchain = "stable"
 rust_version = "stable"
 
@@ -107,7 +107,7 @@ The following diagram outlines the sequence of steps involved in executing bench
 sequenceDiagram
     actor Developer
     participant PR as GitHub Pull Request
-    participant CI as Tracel CI Server
+    participant CI as Nullvora CI Server
     participant W as mabor-bench Workflow
     participant GCP as Google Cloud Platform
     participant BB as mabor-bench Runner
@@ -159,4 +159,4 @@ When triggering it manually, you’ll need to fill in the required input fields.
 
 We welcome contributions to improve benchmarking coverage and add new performance tests.
 
-[`benchmarks.yml` workflow]: https://github.com/tracel-ai/burn-bench/actions/workflows/benchmarks.yml
+[`benchmarks.yml` workflow]: https://github.com/Nullvora/mabor-bench/actions/workflows/benchmarks.yml
