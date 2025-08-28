@@ -1,7 +1,7 @@
 use std::env;
 use std::fs;
 use std::path::Path;
-use std::process::Command;
+use std::process::Command; 
 
 const MODELS_REPO: &str = "https://github.com/tracel-ai/models.git";
 
